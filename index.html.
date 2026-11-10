@@ -1,0 +1,58 @@
+// MODE SIMULASI SENSOR
+
+let intervalSimulasi = null;
+
+function mulaiSimulasi() {
+
+  if (intervalSimulasi !== null) return;
+
+  document.getElementById("status").textContent =
+    "Mode Simulasi";
+
+  document.getElementById("status").style.color =
+    "orange";
+
+  function updateSensor() {
+
+    // Data HR simulasi
+    heartRate = Math.floor(
+      Math.random() * (90 - 65 + 1) + 65
+    );
+
+    // Data temperatur simulasi
+    temperature = Number(
+      (Math.random() * (34 - 30) + 30).toFixed(1)
+    );
+
+    document.getElementById("hr").textContent =
+      heartRate;
+
+    document.getElementById("temp").textContent =
+      temperature.toFixed(1);
+  }
+
+  updateSensor();
+
+  intervalSimulasi = setInterval(
+    updateSensor, 2000
+  );
+}
+
+function berhentiSimulasi() {
+
+  clearInterval(intervalSimulasi);
+
+  intervalSimulasi = null;
+
+  heartRate = null;
+  temperature = null;
+
+  document.getElementById("hr").textContent = "--";
+  document.getElementById("temp").textContent = "--";
+
+  document.getElementById("status").textContent =
+    "Disconnected";
+
+  document.getElementById("status").style.color =
+    "red";
+}
